@@ -1,1 +1,21 @@
-TEST
+1. Adjacency List (AL)
+
+1.1 Create table DDL:
+CREATE TABLE tree 
+  ( 
+     `id`        BIGINT NOT NULL auto_increment PRIMARY KEY, 
+     `parent_id` BIGINT NULL, 
+     `name`      VARCHAR(100) NOT NULL 
+  ) 
+type=innodb 
+DEFAULT charset=utf8; 
+
+CREATE INDEX fk_tree_tree ON tree (parent_id); 
+
+ALTER TABLE tree 
+  ADD CONSTRAINT fk_tree_tree FOREIGN KEY (parent_id) REFERENCES tree (id) ON 
+  UPDATE CASCADE ON DELETE CASCADE;
+1.2 Select all tree
+SELECT * 
+FROM   tree 
+ORDER  BY id;
